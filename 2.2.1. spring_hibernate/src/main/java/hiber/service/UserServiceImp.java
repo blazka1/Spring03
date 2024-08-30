@@ -33,14 +33,10 @@ public class UserServiceImp implements UserService {
    }
 
    @Override
-   @Transactional(readOnly = true)
    public User findUserByCarModelAndSeries(String model, int series) {
-      Session session = sessionFactory.getCurrentSession();
-      return (User) session.createQuery("SELECT u FROM User u JOIN u.car c WHERE c.model = :model AND c.series = :series")
-              .setParameter("model", model)
-              .setParameter("series", series)
-              .uniqueResult();
+      return userDao.findUserByCarModelAndSeries(model, series);
    }
+
 
    @Transactional(readOnly = true)
    @Override
